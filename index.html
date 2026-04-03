@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRAPS — Content Recommendation Engine</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <div class="logo-block">
+      <div class="logo"><span>S</span>CRAPS</div>
+      <div class="tagline">Similarity-based Content Retrieval &amp; Preference System</div>
+    </div>
+    <div class="badge-row">
+      <span class="badge active">TF-IDF</span>
+      <span class="badge active">Cosine Similarity</span>
+      <span class="badge">ECODATA</span>
+      <span class="badge">v1.0</span>
+    </div>
+  </header>
+
+  <!-- Stats bar -->
+  <div class="stats-bar">
+    <div class="stat-cell">
+      <div class="stat-val green" id="corpusCount">—</div>
+      <div class="stat-lbl">Documents</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val" id="vocabSize">—</div>
+      <div class="stat-lbl">Vocab Size</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val" id="lastQueryTime">—</div>
+      <div class="stat-lbl">Query Time</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-val" id="topScore">—</div>
+      <div class="stat-lbl">Top Match</div>
+    </div>
+  </div>
+
+  <!-- Search zone -->
+  <div class="search-zone">
+    <div class="search-label">Query</div>
+    <div class="search-bar">
+      <span class="search-prefix">&gt;_</span>
+      <input id="queryInput" type="text" placeholder="enter topic, keyword, or sentence…" autocomplete="off" spellcheck="false">
+      <button class="search-btn" onclick="runSearch()">RUN</button>
+    </div>
+    <div class="chips" id="exampleChips"></div>
+  </div>
+
+  <!-- Results area -->
+  <div id="resultsSection" style="display:none">
+    <div class="results-header">
+      Ranked Results <span class="count" id="resultCount"></span>
+    </div>
+    <div class="results-grid" id="resultsGrid"></div>
+
+    <!-- TF-IDF debug panel -->
+    <div class="tfidf-panel" style="margin-top:32px">
+      <div class="panel-header" onclick="togglePanel()">
+        <span class="panel-title">▸ TF-IDF Debug — Query Vector</span>
+        <span class="panel-toggle" id="panelToggle">[expand]</span>
+      </div>
+      <div class="panel-body" id="panelBody">
+        <div class="pipeline-steps" id="pipelineSteps"></div>
+        <div style="margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--text-dimmer); letter-spacing:0.1em; text-transform:uppercase; margin-bottom:10px;">Top Query Terms by TF-IDF Weight</div>
+        <div class="token-row" id="tokenRow"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div class="empty-state" id="emptyState">
+    <div class="empty-glyph">⊕</div>
+    <div class="empty-title">Awaiting query vector</div>
+    <div class="empty-sub">Type a topic above or select an example to begin similarity search</div>
+  </div>
+
+</div>
+
+<script src="corpus.js"></script>
+<script src="engine.js"></script>
+</body>
+</html>
